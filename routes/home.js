@@ -1,7 +1,11 @@
-const express = require('express')
-const router = express.Router()
-const homeController = require('../controllers/home')
+const express = require("express");
+const router = express.Router();
+// controller that the GET request on the root route ('/') below gets handed off to
+const homeController = require("../controllers/home");
 
-router.get('/', homeController.getIndex) 
+// GET request on main route
+// router gets the controller (homeController.getIndex in this case, see above) to hand the request off to
+router.get("/", homeController.getIndex);
 
-module.exports = router
+// exports router (info in router.get())
+module.exports = router;
