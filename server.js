@@ -4,6 +4,8 @@ const express = require("express");
 const app = express();
 // imports for connection to the database (here, mongoose is handling the connection)
 // go to config folder then database file
+// variable that holds something (go to a different file to get something, such as function, object, link to another file, etc.)
+// here, we're going to the config directory to the database.js file
 const connectDB = require("./config/database");
 // import home.js from routes directory (catch what's exported from home.js, which is this case is the router in said file, so you can run code from home.js in server.js)
 const homeRoutes = require("./routes/home");
@@ -13,7 +15,7 @@ const todoRoutes = require("./routes/todos");
 // listen for env variables and know how to use .env and where to find it
 require("dotenv").config({ path: "./config/.env" });
 
-// allows for talking to the database; call connectDB function that's spit out of the database.js file
+// allows for talking to the database; call connectDB function that's exported from the database.js file
 connectDB();
 
 // using .ejs as view engine
@@ -22,10 +24,10 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 // replace body parser: parse data that comes out of the body (get data out of the big information dump (request) that's needed)
 app.use(express.urlencoded({ extended: true }));
-// JSON used to parse incoming data
+// JSON used to parse incoming data, also replaces body parser
 app.use(express.json());
 
-// allows for use of routes on the main page ('/' or localhost:2121)
+// allows for use of routes on the main page ('/' or localhost:2121/)
 // triggers homeRoutes above
 app.use("/", homeRoutes);
 // allows for use of routes on the todos page (localhost:2121/todos)

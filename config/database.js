@@ -1,3 +1,4 @@
+// import mongoose module
 const mongoose = require("mongoose");
 
 // function enables to connect to DB using mongoose
