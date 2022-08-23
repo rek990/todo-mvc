@@ -9,7 +9,7 @@ module.exports = {
       // go to models to find the Todo model, finds documents in the db, and counts the number of documents (i.e., todos) remaining
       const todoItems = await Todo.find();
       const itemsLeft = await Todo.countDocuments({ completed: false });
-      // go to views to get todos.ejs, passes the above docs into the file, and respond by rendering the html, reflecting the number of todos that are remaining
+      // go to views to get todos.ejs, passes the above docs (todoItems, itemsLeft) into the file, and respond by rendering the html, reflecting the number of todos that are remaining
       res.render("todos.ejs", { todos: todoItems, left: itemsLeft });
     } catch (err) {
       console.log(err);

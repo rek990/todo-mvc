@@ -1,19 +1,21 @@
-// deal with delete items
+// deleted items
 const deleteBtn = document.querySelectorAll(".del");
-// deals with not completed items
+// items that are not completed
 const todoItem = document.querySelectorAll("span.not");
-// deals with completed items
+// items that are completed
 const todoComplete = document.querySelectorAll("span.completed");
 
 Array.from(deleteBtn).forEach((el) => {
   el.addEventListener("click", deleteTodo);
 });
-// not class
+// creates array from <span class="not"> that are children of the parent class of todoItem (<li/>) and loops through the array
 Array.from(todoItem).forEach((el) => {
+  // adds an event listener to each child element (<span class="not" />) within parent class of todoItem (<li/>), firing the markComplete function when the element is clicked
   el.addEventListener("click", markComplete);
 });
-// completed class
+// creates array from <span class="completed"> that are children of the parent class of todoItem (<li/>) and loops through the array
 Array.from(todoComplete).forEach((el) => {
+  // adds an event listener to each child element (<span class="completed" />) within parent class of todoItem (<li/>), firing the markComplete function when the element is clicked
   el.addEventListener("click", markIncomplete);
 });
 
@@ -36,9 +38,10 @@ async function deleteTodo() {
 }
 
 async function markComplete() {
-  // when span is clicked (this), go up level to <li/> and look at the data attribute (here, it's dataset and id) and grabs id
+  // when span is clicked (this), go up level to <li/> and look at the data attribute (here, it's dataset and id (can call these anything you want) and grabs (unique) id
   const todoId = this.parentNode.dataset.id;
   try {
+    // PUT request
     const response = await fetch("todos/markComplete", {
       method: "put",
       headers: { "Content-type": "application/json" },
