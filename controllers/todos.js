@@ -8,6 +8,7 @@ module.exports = {
     try {
       // go to models to find the Todo model, finds documents in the db, and counts the number of documents (i.e., todos) remaining
       const todoItems = await Todo.find();
+      // counts documents inside the collection
       const itemsLeft = await Todo.countDocuments({ completed: false });
       // go to views to get todos.ejs, passes the above docs (todoItems, itemsLeft) into the file, and respond by rendering the html, reflecting the number of todos that are remaining
       res.render("todos.ejs", { todos: todoItems, left: itemsLeft });
@@ -29,9 +30,12 @@ module.exports = {
   },
   markComplete: async (req, res) => {
     try {
+      // go find the document in todos and update the document with the unique ID
       await Todo.findOneAndUpdate(
+        // unique ID being passed from the front end via PUT request
         { _id: req.body.todoIdFromJSFile },
         {
+          // change the status of the document with the above unique ID to true (completed)
           completed: true,
         }
       );
@@ -43,9 +47,12 @@ module.exports = {
   },
   markIncomplete: async (req, res) => {
     try {
+      // go find the document in todos and update the document with the unique ID
       await Todo.findOneAndUpdate(
+        // unique ID being passed from the front end via PUT request
         { _id: req.body.todoIdFromJSFile },
         {
+          // change the status of the document with the above unique ID to false (not completed)
           completed: false,
         }
       );

@@ -46,11 +46,13 @@ async function markComplete() {
       method: "put",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({
+        // passing along unique ID (todoId) to the server
         todoIdFromJSFile: todoId,
       }),
     });
     const data = await response.json();
     console.log(data);
+    // responds by reloading the page with above updates (GET request)
     location.reload();
   } catch (err) {
     console.log(err);
@@ -58,17 +60,21 @@ async function markComplete() {
 }
 
 async function markIncomplete() {
+  // when span is clicked (this), go up level to <li/> and look at the data attribute (here, it's dataset and id (can call these anything you want) and grabs unique id)
   const todoId = this.parentNode.dataset.id;
   try {
+    // PUT request
     const response = await fetch("todos/markIncomplete", {
       method: "put",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({
+        // passing along unique ID (todoID) to the server
         todoIdFromJSFile: todoId,
       }),
     });
     const data = await response.json();
     console.log(data);
+    // responds by reloading the page with above updates (GET request)
     location.reload();
   } catch (err) {
     console.log(err);
