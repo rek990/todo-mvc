@@ -1,8 +1,9 @@
 // import mongoose
 const mongoose = require("mongoose");
 
-// creating mongoose.Schema called TodoSchema for specific structure in MongoDB db
+// creating mongoose.Schema (model) called TodoSchema for specific structure in MongoDB db
 // this schema is the template for what goes into the MongoDB db
+// schema  maps through the 'todos' collection
 const TodoSchema = new // data in our db Schema (info in the documents)
 // in this case, the documents have a todo property and a completed property
 mongoose.Schema({
@@ -21,4 +22,6 @@ mongoose.Schema({
 });
 
 // exporting model, giving us ability to talk to said model as part of the db
+// instance of model is a document (TodoSchema)
+// enables us to create and read data going into MongoDB
 module.exports = mongoose.model("Todo", TodoSchema);
